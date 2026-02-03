@@ -1,0 +1,27 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tasks tracking (private)
+backend/tasks/
+frontend/tasks/
+
+# Claude docs (private)
+docs/claude/
+
+# Requirements doc (private)
+NonitosRequisitos.md
+
+# Backend specific
+backend/nonitos-food-api/target/
+backend/nonitos-food-api/.env
+
+# Frontend specific (when created)
+frontend/nonitos-food-web/node_modules/
+frontend/nonitos-food-web/dist/
+frontend/nonitos-food-web/.env.local
