@@ -8,6 +8,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Request DTO for user login.
+ * 
+ * <p>Contains credentials required for authentication. Both fields are validated
+ * before reaching the service layer.</p>
+ *
+ * @author Nonito's Food Team
+ * @since 1.0
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "User login request")
 public class LoginRequest {
 
+    /** User email address (must be valid email format) */
     @Schema(
         description = "User email address",
         example = "user@example.com",
@@ -24,6 +34,7 @@ public class LoginRequest {
     @Email(message = "Email must be valid")
     private String email;
 
+    /** User password (plaintext, will be hashed for comparison) */
     @Schema(
         description = "User password",
         example = "SecurePass123",
