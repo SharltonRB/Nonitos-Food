@@ -43,7 +43,7 @@ npm run dev
 
 ## 📊 Estado del Proyecto
 
-- **Backend:** 1/10 tareas completadas (10%)
+- **Backend:** 2/10 tareas completadas (20%)
 - **Frontend:** No iniciado
 
 Ver detalles en:

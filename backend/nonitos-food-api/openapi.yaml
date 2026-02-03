@@ -1,0 +1,234 @@
+openapi: 3.0.1
+info:
+  title: Nonito's Food API
+  description: "REST API for prep meal management system. Allows users to register,\
+    \ login, view menus, and place orders. Administrators can manage dishes, menus,\
+    \ and orders."
+  contact:
+    name: Nonito's Food Team
+    email: dev@nonitosfood.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+security:
+- bearer-jwt: []
+tags:
+- name: Authentication
+  description: User authentication and registration APIs
+paths:
+  /api/auth/verify-email:
+    post:
+      tags:
+      - Authentication
+      summary: Verify email address
+      description: Verifies user email using token sent via email. Token is valid
+        for 24 hours.
+      operationId: verifyEmail
+      parameters:
+      - name: token
+        in: query
+        description: Email verification token
+        required: true
+        schema:
+          type: string
+      responses:
+        "400":
+          description: Invalid or expired verification token
+        "200":
+          description: Email verified successfully
+  /api/auth/register:
+    post:
+      tags:
+      - Authentication
+      summary: Register new user
+      description: Creates a new user account and sends email verification link. Returns
+        JWT tokens for immediate access.
+      operationId: register
+      requestBody:
+        description: User registration details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+        required: true
+      responses:
+        "400":
+          description: Invalid input or email already registered
+        "201":
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+  /api/auth/refresh:
+    post:
+      tags:
+      - Authentication
+      summary: Refresh access token
+      description: Generates new access token using valid refresh token. Refresh token
+        must not be expired.
+      operationId: refreshToken
+      requestBody:
+        description: Refresh token
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+        required: true
+      responses:
+        "401":
+          description: Invalid or expired refresh token
+        "200":
+          description: Token refreshed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+  /api/auth/login:
+    post:
+      tags:
+      - Authentication
+      summary: User login
+      description: Authenticates user with email and password. Returns JWT access
+        and refresh tokens.
+      operationId: login
+      requestBody:
+        description: User login credentials
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      responses:
+        "401":
+          description: Invalid credentials
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+components:
+  schemas:
+    RegisterRequest:
+      required:
+      - email
+      - fullName
+      - password
+      type: object
+      properties:
+        email:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: User email address (must be unique)
+          example: newuser@example.com
+        password:
+          maxLength: 2147483647
+          minLength: 8
+          pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$"
+          type: string
+          description: "User password (min 8 chars, must contain uppercase, lowercase,\
+            \ and number)"
+          example: SecurePass123
+        fullName:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: User full name
+          example: John Doe
+        phoneNumber:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: User phone number (international format recommended)
+          example: +506 8888-8888
+      description: User registration request
+    LoginResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: JWT access token for API authentication
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        refreshToken:
+          type: string
+          description: JWT refresh token for obtaining new access tokens
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        tokenType:
+          type: string
+          description: Token type
+          example: Bearer
+          default: Bearer
+        expiresIn:
+          type: integer
+          description: Access token expiration time in seconds
+          format: int64
+          example: 1800
+        user:
+          $ref: '#/components/schemas/UserInfo'
+      description: Login response with JWT tokens and user information
+    UserInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: User unique identifier
+          format: int64
+          example: 1
+        email:
+          type: string
+          description: User email address
+          example: user@example.com
+        fullName:
+          type: string
+          description: User full name
+          example: John Doe
+        role:
+          type: string
+          description: User role
+          example: CLIENT
+          enum:
+          - ADMIN
+          - CLIENT
+        isEmailVerified:
+          type: boolean
+          description: Whether user email is verified
+          example: true
+      description: User information included in login response
+    TokenRefreshRequest:
+      required:
+      - refreshToken
+      type: object
+      properties:
+        refreshToken:
+          type: string
+          description: JWT refresh token
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+      description: Token refresh request
+    LoginRequest:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+          description: User email address
+          example: user@example.com
+        password:
+          type: string
+          description: User password
+          example: SecurePass123
+      description: User login request
+  securitySchemes:
+    bearer-jwt:
+      type: http
+      description: "JWT token authentication. Obtain token from /api/auth/login or\
+        \ /api/auth/register endpoints. Format: Bearer {token}"
+      scheme: bearer
+      bearerFormat: JWT
