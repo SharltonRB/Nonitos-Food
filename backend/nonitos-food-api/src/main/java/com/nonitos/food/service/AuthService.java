@@ -63,6 +63,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final RedisTemplate<String, String> redisTemplate;
+    private final ClientProfileService clientProfileService;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
     /**
@@ -123,6 +124,12 @@ public class AuthService {
                 .build();
 
         user = userRepository.save(user);
+
+        // Create client profile automatically for CLIENT role
+        if (user.getRole() == User.UserRole.CLIENT) {
+            clientProfileService.createProfile(user.getId());
+            log.info("Created client profile for user: {}", user.getEmail());
+        }
 
         // Mock email sending
         log.info("=== EMAIL VERIFICATION ===");
