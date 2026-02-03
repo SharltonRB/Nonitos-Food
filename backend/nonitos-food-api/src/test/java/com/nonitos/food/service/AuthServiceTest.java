@@ -35,6 +35,9 @@ class AuthServiceTest {
     private RedisTemplate<String, String> redisTemplate;
 
     @Mock
+    private ClientProfileService clientProfileService;
+
+    @Mock
     private ValueOperations<String, String> valueOperations;
 
     @InjectMocks
@@ -68,6 +71,9 @@ class AuthServiceTest {
         assertEquals(1800L, response.getExpiresIn());
         assertNotNull(response.getUser());
         assertEquals("test@example.com", response.getUser().getEmail());
+        
+        // Verify profile creation was called
+        verify(clientProfileService).createProfile(1L);
         assertEquals("Test User", response.getUser().getFullName());
         assertEquals("CLIENT", response.getUser().getRole());
         assertFalse(response.getUser().getIsEmailVerified());
