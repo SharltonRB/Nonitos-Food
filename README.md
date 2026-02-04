@@ -5,8 +5,8 @@ Sistema web completo para gestión de prep meals que permite a administradores c
 ## 📊 Estado del Proyecto
 
 ### Backend
-- **Progreso:** 7/10 tareas completadas (70%)
-- **Tests:** 57 tests unitarios (todos pasan ✅)
+- **Progreso:** 8/10 tareas completadas (80%)
+- **Tests:** 64 tests unitarios (todos pasan ✅)
 - **Última actualización:** 2026-02-03
 
 ### Frontend
@@ -68,6 +68,14 @@ Sistema web completo para gestión de prep meals que permite a administradores c
 - Actualización automática de estado de pedido
 - Tracking completo de transacciones
 
+#### 8. Sistema de Notificaciones ✅
+- Notificaciones basadas en templates
+- 10 tipos de notificaciones pre-configuradas
+- Mock de envío de emails (logs a consola)
+- Tracking de estado leído/no leído
+- Links a entidades relacionadas (pedidos, menús)
+- Integración automática con eventos del sistema
+
 ## 📁 Estructura del Proyecto
 
 ```
@@ -87,7 +95,8 @@ Nonito's-Food/
 │   │   ├── TASK_4_COMPLETED.md  # CRUD de platillos
 │   │   ├── TASK_5_COMPLETED.md  # Menús semanales
 │   │   ├── TASK_6_COMPLETED.md  # Sistema de pedidos
-│   │   └── TASK_7_COMPLETED.md  # Integración de pagos
+│   │   ├── TASK_7_COMPLETED.md  # Integración de pagos
+│   │   └── TASK_8_COMPLETED.md  # Sistema de notificaciones
 │   └── nonitos-food-api/        # Código fuente
 │       ├── src/
 │       ├── pom.xml
@@ -159,6 +168,7 @@ npm run dev
 - `backend/tasks/TASK_5_COMPLETED.md` - Menús semanales
 - `backend/tasks/TASK_6_COMPLETED.md` - Sistema de pedidos
 - `backend/tasks/TASK_7_COMPLETED.md` - Integración de pagos
+- `backend/tasks/TASK_8_COMPLETED.md` - Sistema de notificaciones
 
 ## 🔄 Continuar el Desarrollo
 
@@ -184,7 +194,8 @@ mvn test
 - WeeklyMenuService: 10 tests
 - OrderService: 7 tests
 - PaymentService: 7 tests
-- **Total: 57 tests ✅**
+- NotificationService: 7 tests
+- **Total: 64 tests ✅**
 
 ## 🔐 Seguridad
 
@@ -200,7 +211,7 @@ mvn test
 - [x] Gestión de menús semanales (Task 5) ✅
 - [x] Sistema de pedidos (Task 6) ✅
 - [x] Integración de pagos (Task 7) ✅
-- [ ] Sistema de notificaciones (Task 8)
+- [x] Sistema de notificaciones (Task 8) ✅
 - [ ] Panel de administración (Task 9)
 - [ ] Testing E2E y documentación (Task 10)
 
@@ -263,6 +274,13 @@ mvn test
 - `POST /api/payments/{id}/verify` - Verificar pago (Admin)
 - `GET /api/payments/order/{orderId}` - Transacciones de pedido
 - `GET /api/payments/{id}` - Obtener transacción
+
+### Notificaciones
+- `GET /api/notifications` - Obtener notificaciones del usuario
+- `GET /api/notifications/unread` - Obtener notificaciones no leídas
+- `GET /api/notifications/unread/count` - Contador de no leídas
+- `PUT /api/notifications/{id}/read` - Marcar como leída
+- `PUT /api/notifications/read-all` - Marcar todas como leídas
 
 ## 🐛 Troubleshooting
 

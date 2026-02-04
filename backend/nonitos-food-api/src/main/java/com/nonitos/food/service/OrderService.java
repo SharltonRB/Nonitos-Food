@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,7 @@ public class OrderService {
     private final OrderStatusHistoryRepository orderStatusHistoryRepository;
     private final WeeklyMenuRepository weeklyMenuRepository;
     private final UserRepository userRepository;
+    private final NotificationService notificationService;
 
     private static final BigDecimal PRICE_PER_MEAL = new BigDecimal("10.00");
     private static final int CANCELLATION_HOURS_LIMIT = 24;
@@ -85,6 +87,15 @@ public class OrderService {
 
         order = orderRepository.save(order);
         addStatusHistory(order, null, Order.OrderStatus.PENDING_PAYMENT, client, "Order created");
+
+        // Send notification
+        notificationService.sendNotification(
+                userId,
+                Notification.NotificationType.ORDER_CREATED,
+                Map.of("orderCode", orderCode, "totalAmount", totalAmount.toString()),
+                order.getId(),
+                "Order"
+        );
 
         log.info("Created order {} for user {}", orderCode, userId);
         return buildOrderResponse(order);

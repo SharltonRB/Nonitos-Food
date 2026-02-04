@@ -4,8 +4,8 @@ Backend para el sistema de gestión de prep meals de Nonito's Food.
 
 ## 📊 Estado del Proyecto
 
-- **Progreso:** 7/10 tareas completadas (70%)
-- **Tests:** 57 tests unitarios (todos pasan ✅)
+- **Progreso:** 8/10 tareas completadas (80%)
+- **Tests:** 64 tests unitarios (todos pasan ✅)
 - **Última actualización:** 2026-02-03
 
 ## ✅ Funcionalidades Implementadas
@@ -118,6 +118,32 @@ Backend para el sistema de gestión de prep meals de Nonito's Food.
 - `GET /api/payments/order/{orderId}` - Transacciones de pedido
 - `GET /api/payments/{id}` - Obtener transacción
 
+### 8. Sistema de Notificaciones
+- Notificaciones basadas en templates
+- 10 tipos de notificaciones pre-configuradas
+- Mock de envío de emails (logs a consola)
+- Tracking de estado leído/no leído
+- Links a entidades relacionadas (pedidos, menús)
+
+**Endpoints:**
+- `GET /api/notifications` - Obtener notificaciones del usuario
+- `GET /api/notifications/unread` - Obtener notificaciones no leídas
+- `GET /api/notifications/unread/count` - Contador de no leídas
+- `PUT /api/notifications/{id}/read` - Marcar como leída
+- `PUT /api/notifications/read-all` - Marcar todas como leídas
+
+**Tipos de notificaciones:**
+- ORDER_CREATED - Pedido creado
+- ORDER_PAID - Pedido pagado
+- ORDER_CONFIRMED - Pedido confirmado
+- ORDER_READY - Pedido listo para recoger
+- ORDER_COMPLETED - Pedido completado
+- ORDER_CANCELLED - Pedido cancelado
+- PAYMENT_RECEIVED - Pago recibido
+- PAYMENT_VERIFIED - Pago verificado
+- MENU_PUBLISHED - Nuevo menú publicado
+- MENU_REMINDER - Recordatorio de menú
+
 ## 🚀 Requisitos
 
 - Java 21
@@ -179,6 +205,7 @@ Las migraciones de Flyway se ejecutan automáticamente al iniciar la aplicación
 - V4: Menús semanales y días del menú
 - V5: Pedidos e historial de estados
 - V6: Transacciones de pago
+- V7: Notificaciones y templates de notificaciones
 
 ## 🧪 Testing
 
@@ -195,6 +222,7 @@ mvn test -Dtest=DishServiceTest
 mvn test -Dtest=WeeklyMenuServiceTest
 mvn test -Dtest=OrderServiceTest
 mvn test -Dtest=PaymentServiceTest
+mvn test -Dtest=NotificationServiceTest
 ```
 
 ### Cobertura actual
@@ -205,7 +233,8 @@ mvn test -Dtest=PaymentServiceTest
 - WeeklyMenuService: 10 tests
 - OrderService: 7 tests
 - PaymentService: 7 tests
-- **Total: 57 tests ✅**
+- NotificationService: 7 tests
+- **Total: 64 tests ✅**
 
 ## 📦 Build para Producción
 
@@ -224,12 +253,20 @@ src/main/java/com/nonitos/food/
 │   ├── AuthController
 │   ├── ClientProfileController
 │   ├── DishController
-│   └── CatalogController
+│   ├── CatalogController
+│   ├── WeeklyMenuController
+│   ├── OrderController
+│   ├── PaymentController
+│   └── NotificationController
 ├── service/             # Lógica de negocio
 │   ├── AuthService
 │   ├── JwtService
 │   ├── ClientProfileService
-│   └── DishService
+│   ├── DishService
+│   ├── WeeklyMenuService
+│   ├── OrderService
+│   ├── PaymentService
+│   └── NotificationService
 ├── repository/          # Repositorios JPA
 ├── model/               # Entidades JPA
 │   ├── User
@@ -240,6 +277,13 @@ src/main/java/com/nonitos/food/
 │   ├── Dish
 │   ├── DishImage
 │   ├── DishTag
+│   ├── WeeklyMenu
+│   ├── MenuDay
+│   ├── Order
+│   ├── OrderStatusHistory
+│   ├── Transaction
+│   ├── Notification
+│   ├── NotificationTemplate
 │   └── ...
 ├── dto/                 # Data Transfer Objects
 │   ├── auth/
@@ -247,7 +291,8 @@ src/main/java/com/nonitos/food/
 │   ├── dish/
 │   ├── menu/
 │   ├── order/
-│   └── payment/
+│   ├── payment/
+│   └── notification/
 ├── exception/           # Excepciones personalizadas
 ├── security/            # JWT Filter
 └── util/                # Utilidades
@@ -303,6 +348,9 @@ Asegúrate de tener H2 en el classpath (incluido en `pom.xml`).
 - [x] Gestión de menús semanales ✅
 - [x] Sistema de pedidos ✅
 - [x] Integración de pagos ✅
+- [x] Sistema de notificaciones ✅
+- [ ] Panel de administración (Task 9)
+- [ ] Testing E2E y documentación (Task 10)
 - [ ] Sistema de notificaciones
 - [ ] Panel de administración
 - [ ] Testing E2E
