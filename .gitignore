@@ -1,13 +1,62 @@
-# IDE
+# ===================================
+# SENSITIVE DATA - NEVER COMMIT
+# ===================================
+# Environment variables with secrets
+.env
+.env.*
+!.env.example
+*.env
+*.env.*
+!*.env.example
+
+# API Keys and secrets
+**/secrets/
+**/credentials/
+**/*secret*
+**/*key*.pem
+**/*key*.key
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+# Database dumps
+*.sql
+*.dump
+*.backup
+
+# ===================================
+# IDE & EDITORS
+# ===================================
 .idea/
 .vscode/
 *.iml
+*.iws
+*.ipr
 .kiro/
+.fleet/
+.eclipse/
+.settings/
+.classpath
+.project
+.factorypath
 
-# OS
+# ===================================
+# OS FILES
+# ===================================
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+desktop.ini
 
+# ===================================
+# PROJECT SPECIFIC
+# ===================================
 # Tasks tracking (private)
 backend/tasks/
 frontend/tasks/
@@ -18,11 +67,28 @@ docs/claude/
 # Requirements doc (private)
 NonitosRequisitos.md
 
-# Backend specific
+# ===================================
+# BACKEND (Spring Boot)
+# ===================================
 backend/nonitos-food-api/target/
-backend/nonitos-food-api/.env
+backend/nonitos-food-api/.mvn/
+backend/nonitos-food-api/mvnw
+backend/nonitos-food-api/mvnw.cmd
+backend/nonitos-food-api/HELP.md
+backend/nonitos-food-api/logs/
+backend/nonitos-food-api/*.log
 
-# Frontend specific (when created)
+# ===================================
+# FRONTEND (React)
+# ===================================
 frontend/nonitos-food-web/node_modules/
 frontend/nonitos-food-web/dist/
-frontend/nonitos-food-web/.env.local
+frontend/nonitos-food-web/build/
+frontend/nonitos-food-web/.next/
+frontend/nonitos-food-web/out/
+frontend/nonitos-food-web/.cache/
+frontend/nonitos-food-web/coverage/
+frontend/nonitos-food-web/*.log
+frontend/nonitos-food-web/npm-debug.log*
+frontend/nonitos-food-web/yarn-debug.log*
+frontend/nonitos-food-web/yarn-error.log*
