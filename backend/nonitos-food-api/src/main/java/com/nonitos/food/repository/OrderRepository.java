@@ -47,4 +47,12 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
      * @return true if exists, false otherwise
      */
     boolean existsByOrderCode(String orderCode);
+
+    /**
+     * Counts orders by status.
+     *
+     * @param status the order status
+     * @return count of orders with the status
+     */
+    long countByStatus(Order.OrderStatus status);
 }

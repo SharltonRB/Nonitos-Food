@@ -5,8 +5,8 @@ Sistema web completo para gestión de prep meals que permite a administradores c
 ## 📊 Estado del Proyecto
 
 ### Backend
-- **Progreso:** 8/10 tareas completadas (80%)
-- **Tests:** 64 tests unitarios (todos pasan ✅)
+- **Progreso:** 9/10 tareas completadas (90%)
+- **Tests:** 72 tests unitarios (todos pasan ✅)
 - **Última actualización:** 2026-02-03
 
 ### Frontend
@@ -76,6 +76,12 @@ Sistema web completo para gestión de prep meals que permite a administradores c
 - Links a entidades relacionadas (pedidos, menús)
 - Integración automática con eventos del sistema
 
+#### 9. Panel de Administración ✅
+- Dashboard con métricas en tiempo real
+- Gestión de usuarios (listar, actualizar, eliminar)
+- Métricas: usuarios, pedidos, ingresos, platillos, menús
+- Endpoints protegidos con roles ADMIN/SUPER_ADMIN
+
 ## 📁 Estructura del Proyecto
 
 ```
@@ -96,7 +102,8 @@ Nonito's-Food/
 │   │   ├── TASK_5_COMPLETED.md  # Menús semanales
 │   │   ├── TASK_6_COMPLETED.md  # Sistema de pedidos
 │   │   ├── TASK_7_COMPLETED.md  # Integración de pagos
-│   │   └── TASK_8_COMPLETED.md  # Sistema de notificaciones
+│   │   ├── TASK_8_COMPLETED.md  # Sistema de notificaciones
+│   │   └── TASK_9_COMPLETED.md  # Panel de administración
 │   └── nonitos-food-api/        # Código fuente
 │       ├── src/
 │       ├── pom.xml
@@ -169,6 +176,7 @@ npm run dev
 - `backend/tasks/TASK_6_COMPLETED.md` - Sistema de pedidos
 - `backend/tasks/TASK_7_COMPLETED.md` - Integración de pagos
 - `backend/tasks/TASK_8_COMPLETED.md` - Sistema de notificaciones
+- `backend/tasks/TASK_9_COMPLETED.md` - Panel de administración
 
 ## 🔄 Continuar el Desarrollo
 
@@ -195,7 +203,8 @@ mvn test
 - OrderService: 7 tests
 - PaymentService: 7 tests
 - NotificationService: 7 tests
-- **Total: 64 tests ✅**
+- DashboardService: 8 tests
+- **Total: 72 tests ✅**
 
 ## 🔐 Seguridad
 
@@ -212,7 +221,7 @@ mvn test
 - [x] Sistema de pedidos (Task 6) ✅
 - [x] Integración de pagos (Task 7) ✅
 - [x] Sistema de notificaciones (Task 8) ✅
-- [ ] Panel de administración (Task 9)
+- [x] Panel de administración (Task 9) ✅
 - [ ] Testing E2E y documentación (Task 10)
 
 ### Frontend
@@ -279,6 +288,17 @@ mvn test
 - `GET /api/notifications` - Obtener notificaciones del usuario
 - `GET /api/notifications/unread` - Obtener notificaciones no leídas
 - `GET /api/notifications/unread/count` - Contador de no leídas
+- `PUT /api/notifications/{id}/read` - Marcar como leída
+- `PUT /api/notifications/read-all` - Marcar todas como leídas
+
+### Panel de Administración
+- `GET /api/admin/dashboard/metrics` - Métricas del dashboard (Admin)
+- `GET /api/admin/users` - Listar usuarios con paginación (Admin)
+- `GET /api/admin/users/{id}` - Obtener usuario por ID (Admin)
+- `PUT /api/admin/users/{id}` - Actualizar usuario (Admin)
+- `DELETE /api/admin/users/{id}` - Eliminar usuario (Admin)
+
+## 🐛 Troubleshooting
 - `PUT /api/notifications/{id}/read` - Marcar como leída
 - `PUT /api/notifications/read-all` - Marcar todas como leídas
 

@@ -49,4 +49,12 @@ public interface WeeklyMenuRepository extends JpaRepository<WeeklyMenu, Long> {
      * @return list of published menus
      */
     List<WeeklyMenu> findByStatus(WeeklyMenu.MenuStatus status);
+
+    /**
+     * Counts menus by status.
+     *
+     * @param status the menu status
+     * @return count of menus
+     */
+    long countByStatus(WeeklyMenu.MenuStatus status);
 }
