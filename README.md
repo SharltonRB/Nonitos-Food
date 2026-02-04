@@ -5,8 +5,8 @@ Sistema web completo para gestión de prep meals que permite a administradores c
 ## 📊 Estado del Proyecto
 
 ### Backend
-- **Progreso:** 4/10 tareas completadas (40%)
-- **Tests:** 33 tests unitarios (todos pasan ✅)
+- **Progreso:** 6/10 tareas completadas (60%)
+- **Tests:** 50 tests unitarios (todos pasan ✅)
 - **Última actualización:** 2026-02-03
 
 ### Frontend
@@ -44,6 +44,22 @@ Sistema web completo para gestión de prep meals que permite a administradores c
 - Alergias, restricciones dietéticas, tags de platillos
 - Endpoints públicos para frontend
 
+#### 5. Gestión de Menús Semanales ✅
+- Creación de menús semanales (Admin)
+- Asignación de platillos por día y comida
+- Validación: solo lunes como inicio de semana
+- Solo un menú publicado por semana
+- Cálculo automático de resumen nutricional
+- Estados: DRAFT, PUBLISHED, ARCHIVED
+
+#### 6. Sistema de Pedidos ✅
+- Creación de pedidos por clientes
+- Generación de código único y QR
+- Máquina de estados de pedido
+- Historial de cambios de estado
+- Política de cancelación (24 horas)
+- Cálculo automático de monto total
+
 ## 📁 Estructura del Proyecto
 
 ```
@@ -60,7 +76,9 @@ Nonito's-Food/
 │   │   ├── TASK_1_COMPLETED.md  # Configuración inicial
 │   │   ├── TASK_2_COMPLETED.md  # Autenticación JWT
 │   │   ├── TASK_3_COMPLETED.md  # Perfiles de usuario
-│   │   └── TASK_4_COMPLETED.md  # CRUD de platillos
+│   │   ├── TASK_4_COMPLETED.md  # CRUD de platillos
+│   │   ├── TASK_5_COMPLETED.md  # Menús semanales
+│   │   └── TASK_6_COMPLETED.md  # Sistema de pedidos
 │   └── nonitos-food-api/        # Código fuente
 │       ├── src/
 │       ├── pom.xml
@@ -103,7 +121,7 @@ npm run dev
 - **Migraciones:** Flyway
 - **Seguridad:** Spring Security + JWT
 - **Build:** Maven 3.8+
-- **Testing:** JUnit 5 + Mockito (33 tests ✅)
+- **Testing:** JUnit 5 + Mockito (50 tests ✅)
 
 ### Frontend (próximamente)
 - React 18
@@ -129,6 +147,8 @@ npm run dev
 - `backend/tasks/TASK_2_COMPLETED.md` - Autenticación JWT
 - `backend/tasks/TASK_3_COMPLETED.md` - Perfiles de usuario
 - `backend/tasks/TASK_4_COMPLETED.md` - CRUD de platillos
+- `backend/tasks/TASK_5_COMPLETED.md` - Menús semanales
+- `backend/tasks/TASK_6_COMPLETED.md` - Sistema de pedidos
 
 ## 🔄 Continuar el Desarrollo
 
@@ -151,7 +171,9 @@ mvn test
 - JwtService: 8 tests
 - ClientProfileService: 9 tests
 - DishService: 9 tests
-- **Total: 33 tests ✅**
+- WeeklyMenuService: 10 tests
+- OrderService: 7 tests
+- **Total: 50 tests ✅**
 
 ## 🔐 Seguridad
 
@@ -164,8 +186,8 @@ mvn test
 ## 📝 Próximas Funcionalidades
 
 ### Backend
-- [ ] Gestión de menús semanales (Task 5)
-- [ ] Sistema de pedidos (Task 6)
+- [x] Gestión de menús semanales (Task 5) ✅
+- [x] Sistema de pedidos (Task 6) ✅
 - [ ] Integración de pagos (Task 7)
 - [ ] Sistema de notificaciones (Task 8)
 - [ ] Panel de administración (Task 9)
@@ -207,6 +229,22 @@ mvn test
 - `GET /api/catalogs/allergies` - Alergias
 - `GET /api/catalogs/restrictions` - Restricciones dietéticas
 - `GET /api/catalogs/tags` - Tags de platillos
+
+### Menús Semanales
+- `POST /api/menus` - Crear menú (Admin)
+- `GET /api/menus/{id}` - Obtener menú
+- `GET /api/menus/published` - Listar menús publicados
+- `PUT /api/menus/{id}` - Actualizar menú (Admin)
+- `POST /api/menus/{id}/publish` - Publicar menú (Admin)
+- `DELETE /api/menus/{id}` - Eliminar menú (Admin)
+
+### Pedidos
+- `POST /api/orders` - Crear pedido (Client)
+- `GET /api/orders/{id}` - Obtener pedido
+- `GET /api/orders/my-orders` - Mis pedidos (Client)
+- `GET /api/orders` - Todos los pedidos (Admin)
+- `PUT /api/orders/{id}/status` - Actualizar estado (Admin)
+- `POST /api/orders/{id}/cancel` - Cancelar pedido (Client)
 
 ## 🐛 Troubleshooting
 
