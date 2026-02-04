@@ -3,8 +3,10 @@ package com.nonitos.food.controller;
 import com.nonitos.food.dto.ApiResponse;
 import com.nonitos.food.model.Allergy;
 import com.nonitos.food.model.DietaryRestriction;
+import com.nonitos.food.model.DishTag;
 import com.nonitos.food.repository.AllergyRepository;
 import com.nonitos.food.repository.DietaryRestrictionRepository;
+import com.nonitos.food.repository.DishTagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ public class CatalogController {
 
     private final AllergyRepository allergyRepository;
     private final DietaryRestrictionRepository dietaryRestrictionRepository;
+    private final DishTagRepository dishTagRepository;
 
     /**
      * Gets all available allergies.
@@ -47,5 +50,16 @@ public class CatalogController {
     public ResponseEntity<ApiResponse<List<DietaryRestriction>>> getRestrictions() {
         List<DietaryRestriction> restrictions = dietaryRestrictionRepository.findAll();
         return ResponseEntity.ok(ApiResponse.success(restrictions));
+    }
+
+    /**
+     * Gets all available dish tags.
+     *
+     * @return list of dish tags
+     */
+    @GetMapping("/tags")
+    public ResponseEntity<ApiResponse<List<DishTag>>> getTags() {
+        List<DishTag> tags = dishTagRepository.findAll();
+        return ResponseEntity.ok(ApiResponse.success(tags));
     }
 }
