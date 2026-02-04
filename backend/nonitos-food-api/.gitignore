@@ -1,23 +1,74 @@
+# ===================================
+# SENSITIVE DATA - NEVER COMMIT
+# ===================================
+# Environment files with secrets
+.env
+.env.*
+!.env.example
+*.env
+*.env.*
+!*.env.example
+
+# Application properties with secrets
+application-prod.yml
+application-prod.properties
+application-secrets.yml
+application-secrets.properties
+
+# API Keys and certificates
+**/secrets/
+**/credentials/
+**/*secret*
+**/*key*.pem
+**/*key*.key
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+*.crt
+*.cer
+
+# Database files and dumps
+*.sql
+*.dump
+*.backup
+*.db
+*.sqlite
+*.sqlite3
+
+# ===================================
+# BUILD OUTPUT
+# ===================================
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+out/
+bin/
 
-### STS ###
+# ===================================
+# IDE & EDITORS
+# ===================================
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+.idea_modules/
+
+### Eclipse/STS ###
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
 .sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
 
 ### NetBeans ###
 /nbproject/private/
@@ -25,18 +76,43 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
+.code-workspace
 
-### Environment ###
-.env
-.env.local
-.env.*.local
-
-### Logs ###
+# ===================================
+# LOGS
+# ===================================
 *.log
 logs/
+log/
+*.log.*
+*.log.gz
+
+# ===================================
+# TESTING
+# ===================================
+coverage/
+.coverage
+*.cover
+htmlcov/
+
+# ===================================
+# OS FILES
+# ===================================
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+desktop.ini
+
+# ===================================
+# TEMPORARY FILES
+# ===================================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.cache/
