@@ -4,8 +4,8 @@ Backend para el sistema de gestión de prep meals de Nonito's Food.
 
 ## 📊 Estado del Proyecto
 
-- **Progreso:** 6/10 tareas completadas (60%)
-- **Tests:** 50 tests unitarios (todos pasan ✅)
+- **Progreso:** 7/10 tareas completadas (70%)
+- **Tests:** 57 tests unitarios (todos pasan ✅)
 - **Última actualización:** 2026-02-03
 
 ## ✅ Funcionalidades Implementadas
@@ -104,6 +104,20 @@ Backend para el sistema de gestión de prep meals de Nonito's Food.
 - `PUT /api/orders/{id}/status` - Actualizar estado (Admin)
 - `POST /api/orders/{id}/cancel` - Cancelar pedido (Client)
 
+### 7. Integración de Pagos
+- Mock de Stripe para tarjetas de crédito
+- Soporte para transferencia bancaria y SINPE Móvil
+- Verificación admin para pagos manuales
+- Actualización automática de estado de pedido
+- Tracking completo de transacciones
+
+**Endpoints:**
+- `POST /api/payments/credit-card` - Pago con tarjeta (Client)
+- `POST /api/payments/manual` - Pago manual (Client)
+- `POST /api/payments/{id}/verify` - Verificar pago (Admin)
+- `GET /api/payments/order/{orderId}` - Transacciones de pedido
+- `GET /api/payments/{id}` - Obtener transacción
+
 ## 🚀 Requisitos
 
 - Java 21
@@ -164,6 +178,7 @@ Las migraciones de Flyway se ejecutan automáticamente al iniciar la aplicación
 - V3: Platillos, imágenes, tags, alérgenos
 - V4: Menús semanales y días del menú
 - V5: Pedidos e historial de estados
+- V6: Transacciones de pago
 
 ## 🧪 Testing
 
@@ -179,6 +194,7 @@ mvn test -Dtest=ClientProfileServiceTest
 mvn test -Dtest=DishServiceTest
 mvn test -Dtest=WeeklyMenuServiceTest
 mvn test -Dtest=OrderServiceTest
+mvn test -Dtest=PaymentServiceTest
 ```
 
 ### Cobertura actual
@@ -188,7 +204,8 @@ mvn test -Dtest=OrderServiceTest
 - DishService: 9 tests
 - WeeklyMenuService: 10 tests
 - OrderService: 7 tests
-- **Total: 50 tests ✅**
+- PaymentService: 7 tests
+- **Total: 57 tests ✅**
 
 ## 📦 Build para Producción
 
@@ -229,7 +246,8 @@ src/main/java/com/nonitos/food/
 │   ├── profile/
 │   ├── dish/
 │   ├── menu/
-│   └── order/
+│   ├── order/
+│   └── payment/
 ├── exception/           # Excepciones personalizadas
 ├── security/            # JWT Filter
 └── util/                # Utilidades
@@ -284,7 +302,7 @@ Asegúrate de tener H2 en el classpath (incluido en `pom.xml`).
 
 - [x] Gestión de menús semanales ✅
 - [x] Sistema de pedidos ✅
-- [ ] Integración de pagos
+- [x] Integración de pagos ✅
 - [ ] Sistema de notificaciones
 - [ ] Panel de administración
 - [ ] Testing E2E

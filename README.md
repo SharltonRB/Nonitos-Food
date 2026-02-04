@@ -5,8 +5,8 @@ Sistema web completo para gestión de prep meals que permite a administradores c
 ## 📊 Estado del Proyecto
 
 ### Backend
-- **Progreso:** 6/10 tareas completadas (60%)
-- **Tests:** 50 tests unitarios (todos pasan ✅)
+- **Progreso:** 7/10 tareas completadas (70%)
+- **Tests:** 57 tests unitarios (todos pasan ✅)
 - **Última actualización:** 2026-02-03
 
 ### Frontend
@@ -60,6 +60,14 @@ Sistema web completo para gestión de prep meals que permite a administradores c
 - Política de cancelación (24 horas)
 - Cálculo automático de monto total
 
+#### 7. Integración de Pagos ✅
+- Mock de Stripe para tarjetas de crédito
+- Soporte para transferencia bancaria
+- Soporte para SINPE Móvil
+- Verificación admin para pagos manuales
+- Actualización automática de estado de pedido
+- Tracking completo de transacciones
+
 ## 📁 Estructura del Proyecto
 
 ```
@@ -78,7 +86,8 @@ Nonito's-Food/
 │   │   ├── TASK_3_COMPLETED.md  # Perfiles de usuario
 │   │   ├── TASK_4_COMPLETED.md  # CRUD de platillos
 │   │   ├── TASK_5_COMPLETED.md  # Menús semanales
-│   │   └── TASK_6_COMPLETED.md  # Sistema de pedidos
+│   │   ├── TASK_6_COMPLETED.md  # Sistema de pedidos
+│   │   └── TASK_7_COMPLETED.md  # Integración de pagos
 │   └── nonitos-food-api/        # Código fuente
 │       ├── src/
 │       ├── pom.xml
@@ -121,7 +130,7 @@ npm run dev
 - **Migraciones:** Flyway
 - **Seguridad:** Spring Security + JWT
 - **Build:** Maven 3.8+
-- **Testing:** JUnit 5 + Mockito (50 tests ✅)
+- **Testing:** JUnit 5 + Mockito (57 tests ✅)
 
 ### Frontend (próximamente)
 - React 18
@@ -149,6 +158,7 @@ npm run dev
 - `backend/tasks/TASK_4_COMPLETED.md` - CRUD de platillos
 - `backend/tasks/TASK_5_COMPLETED.md` - Menús semanales
 - `backend/tasks/TASK_6_COMPLETED.md` - Sistema de pedidos
+- `backend/tasks/TASK_7_COMPLETED.md` - Integración de pagos
 
 ## 🔄 Continuar el Desarrollo
 
@@ -173,7 +183,8 @@ mvn test
 - DishService: 9 tests
 - WeeklyMenuService: 10 tests
 - OrderService: 7 tests
-- **Total: 50 tests ✅**
+- PaymentService: 7 tests
+- **Total: 57 tests ✅**
 
 ## 🔐 Seguridad
 
@@ -188,7 +199,7 @@ mvn test
 ### Backend
 - [x] Gestión de menús semanales (Task 5) ✅
 - [x] Sistema de pedidos (Task 6) ✅
-- [ ] Integración de pagos (Task 7)
+- [x] Integración de pagos (Task 7) ✅
 - [ ] Sistema de notificaciones (Task 8)
 - [ ] Panel de administración (Task 9)
 - [ ] Testing E2E y documentación (Task 10)
@@ -245,6 +256,13 @@ mvn test
 - `GET /api/orders` - Todos los pedidos (Admin)
 - `PUT /api/orders/{id}/status` - Actualizar estado (Admin)
 - `POST /api/orders/{id}/cancel` - Cancelar pedido (Client)
+
+### Pagos
+- `POST /api/payments/credit-card` - Pago con tarjeta (Client)
+- `POST /api/payments/manual` - Pago manual (Client)
+- `POST /api/payments/{id}/verify` - Verificar pago (Admin)
+- `GET /api/payments/order/{orderId}` - Transacciones de pedido
+- `GET /api/payments/{id}` - Obtener transacción
 
 ## 🐛 Troubleshooting
 
