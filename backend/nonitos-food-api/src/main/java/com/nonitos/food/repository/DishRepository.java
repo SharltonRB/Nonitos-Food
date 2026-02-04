@@ -31,4 +31,12 @@ public interface DishRepository extends JpaRepository<Dish, Long>, JpaSpecificat
      * @return optional containing the dish if found
      */
     Optional<Dish> findByName(String name);
+
+    /**
+     * Counts dishes by active status.
+     *
+     * @param isActive the active status
+     * @return count of dishes
+     */
+    long countByIsActive(Boolean isActive);
 }

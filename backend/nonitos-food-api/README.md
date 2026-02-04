@@ -4,8 +4,8 @@ Backend para el sistema de gestión de prep meals de Nonito's Food.
 
 ## 📊 Estado del Proyecto
 
-- **Progreso:** 8/10 tareas completadas (80%)
-- **Tests:** 64 tests unitarios (todos pasan ✅)
+- **Progreso:** 9/10 tareas completadas (90%)
+- **Tests:** 72 tests unitarios (todos pasan ✅)
 - **Última actualización:** 2026-02-03
 
 ## ✅ Funcionalidades Implementadas
@@ -144,6 +144,26 @@ Backend para el sistema de gestión de prep meals de Nonito's Food.
 - MENU_PUBLISHED - Nuevo menú publicado
 - MENU_REMINDER - Recordatorio de menú
 
+### 9. Panel de Administración
+- Dashboard con métricas en tiempo real
+- Gestión de usuarios (listar, actualizar, eliminar)
+- Métricas: usuarios, pedidos, ingresos, platillos, menús
+- Endpoints protegidos con roles ADMIN/SUPER_ADMIN
+
+**Endpoints:**
+- `GET /api/admin/dashboard/metrics` - Métricas del dashboard (Admin)
+- `GET /api/admin/users` - Listar usuarios con paginación (Admin)
+- `GET /api/admin/users/{id}` - Obtener usuario por ID (Admin)
+- `PUT /api/admin/users/{id}` - Actualizar usuario (Admin)
+- `DELETE /api/admin/users/{id}` - Eliminar usuario (Admin)
+
+**Métricas disponibles:**
+- Total de usuarios y clientes
+- Total de pedidos (pendientes, completados)
+- Ingresos totales y pendientes
+- Total de platillos (activos)
+- Total de menús (publicados)
+
 ## 🚀 Requisitos
 
 - Java 21
@@ -223,6 +243,7 @@ mvn test -Dtest=WeeklyMenuServiceTest
 mvn test -Dtest=OrderServiceTest
 mvn test -Dtest=PaymentServiceTest
 mvn test -Dtest=NotificationServiceTest
+mvn test -Dtest=DashboardServiceTest
 ```
 
 ### Cobertura actual
@@ -234,7 +255,8 @@ mvn test -Dtest=NotificationServiceTest
 - OrderService: 7 tests
 - PaymentService: 7 tests
 - NotificationService: 7 tests
-- **Total: 64 tests ✅**
+- DashboardService: 8 tests
+- **Total: 72 tests ✅**
 
 ## 📦 Build para Producción
 
@@ -257,7 +279,8 @@ src/main/java/com/nonitos/food/
 │   ├── WeeklyMenuController
 │   ├── OrderController
 │   ├── PaymentController
-│   └── NotificationController
+│   ├── NotificationController
+│   └── DashboardController
 ├── service/             # Lógica de negocio
 │   ├── AuthService
 │   ├── JwtService
@@ -266,7 +289,8 @@ src/main/java/com/nonitos/food/
 │   ├── WeeklyMenuService
 │   ├── OrderService
 │   ├── PaymentService
-│   └── NotificationService
+│   ├── NotificationService
+│   └── DashboardService
 ├── repository/          # Repositorios JPA
 ├── model/               # Entidades JPA
 │   ├── User
@@ -292,7 +316,8 @@ src/main/java/com/nonitos/food/
 │   ├── menu/
 │   ├── order/
 │   ├── payment/
-│   └── notification/
+│   ├── notification/
+│   └── dashboard/
 ├── exception/           # Excepciones personalizadas
 ├── security/            # JWT Filter
 └── util/                # Utilidades
@@ -349,7 +374,7 @@ Asegúrate de tener H2 en el classpath (incluido en `pom.xml`).
 - [x] Sistema de pedidos ✅
 - [x] Integración de pagos ✅
 - [x] Sistema de notificaciones ✅
-- [ ] Panel de administración (Task 9)
+- [x] Panel de administración ✅
 - [ ] Testing E2E y documentación (Task 10)
 - [ ] Sistema de notificaciones
 - [ ] Panel de administración

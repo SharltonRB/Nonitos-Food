@@ -39,4 +39,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return optional containing user if found, empty otherwise
      */
     Optional<User> findByEmailVerificationToken(String token);
+
+    /**
+     * Counts users by role.
+     *
+     * @param role the user role
+     * @return count of users with the role
+     */
+    long countByRole(User.UserRole role);
 }
