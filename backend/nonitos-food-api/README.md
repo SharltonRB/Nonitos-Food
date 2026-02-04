@@ -4,8 +4,8 @@ Backend para el sistema de gestión de prep meals de Nonito's Food.
 
 ## 📊 Estado del Proyecto
 
-- **Progreso:** 4/10 tareas completadas (40%)
-- **Tests:** 33 tests unitarios (todos pasan ✅)
+- **Progreso:** 6/10 tareas completadas (60%)
+- **Tests:** 50 tests unitarios (todos pasan ✅)
 - **Última actualización:** 2026-02-03
 
 ## ✅ Funcionalidades Implementadas
@@ -71,6 +71,39 @@ Backend para el sistema de gestión de prep meals de Nonito's Food.
 - `GET /api/catalogs/restrictions` - Catálogo de restricciones
 - `GET /api/catalogs/tags` - Catálogo de tags
 
+### 5. Gestión de Menús Semanales
+- Creación de menús semanales (Admin)
+- Asignación de platillos por día y comida
+- Validación: solo lunes como inicio de semana
+- Solo un menú publicado por semana
+- Cálculo automático de resumen nutricional
+- Estados: DRAFT, PUBLISHED, ARCHIVED
+
+**Endpoints:**
+- `POST /api/menus` - Crear menú (Admin)
+- `GET /api/menus/{id}` - Obtener menú
+- `GET /api/menus/published` - Listar menús publicados
+- `PUT /api/menus/{id}` - Actualizar menú (Admin)
+- `POST /api/menus/{id}/publish` - Publicar menú (Admin)
+- `DELETE /api/menus/{id}` - Eliminar menú (Admin)
+
+### 6. Sistema de Pedidos
+- Creación de pedidos por clientes
+- Generación de código único (8 caracteres)
+- Mock de QR code para pickup
+- Máquina de estados de pedido
+- Historial de cambios de estado
+- Política de cancelación (24 horas antes)
+- Cálculo automático de monto total
+
+**Endpoints:**
+- `POST /api/orders` - Crear pedido (Client)
+- `GET /api/orders/{id}` - Obtener pedido
+- `GET /api/orders/my-orders` - Mis pedidos (Client)
+- `GET /api/orders` - Todos los pedidos (Admin)
+- `PUT /api/orders/{id}/status` - Actualizar estado (Admin)
+- `POST /api/orders/{id}/cancel` - Cancelar pedido (Client)
+
 ## 🚀 Requisitos
 
 - Java 21
@@ -129,6 +162,8 @@ Las migraciones de Flyway se ejecutan automáticamente al iniciar la aplicación
 - V1: Tabla de usuarios
 - V2: Perfiles de cliente, alergias, restricciones, preferencias
 - V3: Platillos, imágenes, tags, alérgenos
+- V4: Menús semanales y días del menú
+- V5: Pedidos e historial de estados
 
 ## 🧪 Testing
 
@@ -142,6 +177,8 @@ mvn test
 mvn test -Dtest=AuthServiceTest
 mvn test -Dtest=ClientProfileServiceTest
 mvn test -Dtest=DishServiceTest
+mvn test -Dtest=WeeklyMenuServiceTest
+mvn test -Dtest=OrderServiceTest
 ```
 
 ### Cobertura actual
@@ -149,7 +186,9 @@ mvn test -Dtest=DishServiceTest
 - JwtService: 8 tests
 - ClientProfileService: 9 tests
 - DishService: 9 tests
-- **Total: 33 tests ✅**
+- WeeklyMenuService: 10 tests
+- OrderService: 7 tests
+- **Total: 50 tests ✅**
 
 ## 📦 Build para Producción
 
@@ -188,7 +227,9 @@ src/main/java/com/nonitos/food/
 ├── dto/                 # Data Transfer Objects
 │   ├── auth/
 │   ├── profile/
-│   └── dish/
+│   ├── dish/
+│   ├── menu/
+│   └── order/
 ├── exception/           # Excepciones personalizadas
 ├── security/            # JWT Filter
 └── util/                # Utilidades
@@ -241,8 +282,8 @@ Asegúrate de tener H2 en el classpath (incluido en `pom.xml`).
 
 ## 📝 Próximas Funcionalidades
 
-- [ ] Gestión de menús semanales
-- [ ] Sistema de pedidos
+- [x] Gestión de menús semanales ✅
+- [x] Sistema de pedidos ✅
 - [ ] Integración de pagos
 - [ ] Sistema de notificaciones
 - [ ] Panel de administración
